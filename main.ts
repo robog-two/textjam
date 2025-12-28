@@ -133,16 +133,16 @@ const customers: Customer[] = [
     { // 3:30
         name: "Dee",
         dialog: "Is there anything that can cover my walls? I keep telling my husband the brick is ugly.",
-        accepts: ["g"],
+        accepts: ["v"],
         yayDialog: "Yes, this will work. MIKE! I FOUND SOMETHING!!! ... Thank you. Goodbye.",
         yayCallback: () => {makeMoney(8, 95)},
-        booDialog: "I'm not so sure.",
+        booDialog: "I'm not sure about that one. MIKE! COME HERE! THEY DIDN'T HAVE IT! ... Thank you. Goodbye.",
     },
     { // 4:30
         name: "Mike",
         dialog: "I hate pet stores.",
         accepts: ["t"],
-        yayDialog: "This... *sniffle*... reminds me of my mother. Have all of my cash! *sniffle* I have to go *sobbing*",
+        yayDialog: "This... *sniffle*... reminds me of my mother. Have all of my cash! *sniffle* I have to go. *sobbing*",
         yayCallback: () => {makeMoney(20, 0)},
         booDialog: "I still hate pet stores. Give me your money.",
         booCallback: () => {takeMoney(20, 0)}
@@ -230,8 +230,11 @@ You may:
         }
         task = task?.toLowerCase() ?? "";
         if (task == "f") {
-            let stock = prompt("Which to feed or water: ") ?? "";
-            stock = stock.toLowerCase();
+            let stock: string = "";
+            while (!isValidItem(stock)) {
+                stock = prompt("Which to feed or water: ") ?? "";
+                stock = stock.toLowerCase();
+            }
             if (isValidItem(stock)) {
                 inventory[stock].fed += 1;
             }
@@ -384,7 +387,7 @@ function waitClear() {
 }
 
 // GAME FINISH ==============================================
-const end = Date.now() + 1_000;
+let end = Date.now() + 1_000;
 while (Date.now() < end);
 console.log(`
              ___________
@@ -402,9 +405,23 @@ Your stats:
 
         `)
 if (payDock != 0) {
-    console.log("You were docked $" + payDock + " at the end of the day for not doing your job.");
+    console.log("You were docked $" + payDock + " at the end of the day for not doing your job.\n\n");
     takeMoney(payDock, 0);
 }
-printInventory();
+
+for (const item of Object.values(inventory)) {
+    end = Date.now() + 250;
+    while (Date.now() < end);
+    console.log(`+$1.99 for keeping ${item.name} alive`)
+    makeMoney(1, 99);
+}
+end = Date.now() + 250;
+while (Date.now() < end);
+
+console.log("\n\nAnd your grand total is...\n\n")
+
+end = Date.now() + 250;
+while (Date.now() < end);
+
 printMoney();
 console.log("\n\n\n\nThank you for playing!")
