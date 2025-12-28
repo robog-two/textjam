@@ -249,20 +249,56 @@ You may:
     }
 
     // Fish/plant feeding and watering
-    if (inventory.g.alive && inventory.g.fed > 3) console.log("Goldfish was overfed and died."); inventory.s.alive = false;
-    if (inventory.s.alive && inventory.s.fed > 1) console.log("Snail was overfed and died."); inventory.m.alive = false;
-    if (inventory.m.alive && inventory.m.fed > 6) console.log("Mini Seahorse was overfed and died."); inventory.g.alive = false;
-    if (inventory.u.alive && inventory.u.fed > 0) console.log("Succulent was overwatered and died."); inventory.u.alive = false;
-    if (inventory.t.alive && inventory.t.fed > 9) console.log("Tulip was overwatered and died."); inventory.t.alive = false;
-    if (inventory.v.alive && inventory.v.fed > 9) console.log("Vine was overwatered and died."); inventory.v.alive = false;
+    if (inventory.g.alive && inventory.g.fed > 3) {
+        console.log("Goldfish was overfed and died.");
+        inventory.g.alive = false;
+    }
+    if (inventory.s.alive && inventory.s.fed > 1) {
+        console.log("Snail was overfed and died.");
+        inventory.s.alive = false;
+    }
+    if (inventory.m.alive && inventory.m.fed > 6) {
+        console.log("Mini Seahorse was overfed and died.");
+        inventory.m.alive = false;
+    }
+    if (inventory.u.alive && inventory.u.fed > 1) {
+        console.log("Succulent was overwatered and died.");
+        inventory.u.alive = false;
+    }
+    if (inventory.t.alive && inventory.t.fed > 9) {
+        console.log("Tulip was overwatered and died.");
+        inventory.t.alive = false;
+    }
+    if (inventory.v.alive && inventory.v.fed > 9) {
+        console.log("Vine was overwatered and died.");
+        inventory.v.alive = false;
+    }
 
 
-    if (inventory.g.alive && hour > 4 && inventory.g.fed < 1) console.log("Goldfish was hungry and died."); inventory.g.alive = false;
-    if (inventory.s.alive && hour > 6 && inventory.s.fed < 1) console.log("Snail was hungry and died."); inventory.s.alive = false;
-    if (inventory.m.alive && hour > 4 && inventory.m.fed < 1) console.log("Mini Seahorse was hungry and died."); inventory.m.alive = false;
-    if (inventory.m.alive && hour > 7 && inventory.m.fed < 2) console.log("Mini Seahorse was hungry and died."); inventory.m.alive = false;
-    if (inventory.t.alive && hour > 5 && inventory.t.fed < 1) console.log("Tulip was thirsty and died."); inventory.t.alive = false;
-    if (inventory.v.alive && hour % 2 == 0 && inventory.v.fed < hour/2) console.log("Vine was thirsty and died."); inventory.v.alive = false;
+    if (inventory.g.alive && hour > 4 && inventory.g.fed < 1) {
+        console.log("Goldfish was hungry and died.");
+        inventory.g.alive = false;
+    }
+    if (inventory.s.alive && hour > 6 && inventory.s.fed < 1) {
+        console.log("Snail was hungry and died.");
+        inventory.s.alive = false;
+    }
+    if (inventory.m.alive && hour > 4 && inventory.m.fed < 1) {
+        console.log("Mini Seahorse was hungry and died.");
+        inventory.m.alive = false;
+    }
+    if (inventory.m.alive && hour > 7 && inventory.m.fed < 2) {
+        console.log("Mini Seahorse was hungry and died.");
+        inventory.m.alive = false;
+    }
+    if (inventory.t.alive && hour > 5 && inventory.t.fed < 1) {
+        console.log("Tulip was thirsty and died.");
+        inventory.t.alive = false;
+    }
+    if (inventory.v.alive && hour % 2 == 0 && inventory.v.fed < hour/2) {
+        console.log("Vine was thirsty and died.");
+        inventory.v.alive = false;
+    }
 
     waitClear();
     hour += 0.25;
