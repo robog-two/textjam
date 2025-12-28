@@ -162,6 +162,7 @@ const customers: Customer[] = [
         yayDialog: "Thanks.\n\n( You should not have sold them a fish )",
         yayCallback: () => {payDock++},
         booDialog: "Ugh. You pet store employees are such jerks. Who cares, they are just fish.\n\n( You made the right call )",
+        booCallback: () => {makeMoney(0, 99)},
     },
     { // 7:30
         name: "Dr. Horton",
@@ -169,7 +170,7 @@ const customers: Customer[] = [
         accepts: ["g","s","m","u","t","v"],
         yayDialog: "Yes. This will do.",
         yayCallback: () => {makeMoney(5, 99)},
-        booDialog: "Mmmm. I suppose I will revive one of these dead ones like doctor Frankenstein! Great idea, have a big tip.",
+        booDialog: "No, you're right. It was a bad idea.",
         booCallback: () => {makeMoney(8, 49)},
     },
 ]
@@ -190,9 +191,9 @@ while (hour < 8) {
         console.log("The fish have died due to unclean tanks.");
         inventory.g.alive = false;inventory.s.alive = false;inventory.m.alive = false;
     };
-    if (hour - floorLastCleaned > 1) console.log("The aisles are uneven.");
-    if (hour - floorLastCleaned > 2) console.log("Actually, the aisles are a total mess.");
-    if (hour - floorLastCleaned > 3) payDock++;
+    if (hour - aisleLastOrganized > 1) console.log("The aisles are uneven.");
+    if (hour - aisleLastOrganized > 2) console.log("Actually, the aisles are a total mess.");
+    if (hour - aisleLastOrganized > 3) payDock++;
     // end events ==========
 
     if (hour - Math.floor(hour) == 0.5) {
@@ -262,7 +263,7 @@ You may:
         console.log("Mini Seahorse was overfed and died.");
         inventory.m.alive = false;
     }
-    if (inventory.u.alive && inventory.u.fed > 1) {
+    if (inventory.u.alive && inventory.u.fed >= 1) {
         console.log("Succulent was overwatered and died.");
         inventory.u.alive = false;
     }
