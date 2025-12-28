@@ -18,11 +18,8 @@ WORKDIR /app
 
 COPY main.ts /app/
 
-# Create .bashrc that runs the game on login
-RUN echo 'deno run /app/main.ts; exit' > /root/.bashrc
-
 # Configure inetd for telnet - execute bash directly without login
-RUN echo 'telnet stream tcp nowait root /usr/sbin/telnetd telnetd -E /bin/bash' >> /etc/inetd.conf
+RUN echo 'telnet stream tcp nowait root /usr/sbin/telnetd telnetd -E /root/.deno/bin/deno run /app/main.ts' >> /etc/inetd.conf
 
 EXPOSE 23
 
