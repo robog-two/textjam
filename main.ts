@@ -144,7 +144,7 @@ const customers: Customer[] = [
         accepts: ["t"],
         yayDialog: "This... *sniffle*... reminds me of my mother. Have all of my cash! *sniffle* I have to go *sobbing*",
         yayCallback: () => {makeMoney(20, 0)},
-        booDialog: "I hate pet stores. Give me your money.",
+        booDialog: "I still hate pet stores. Give me your money.",
         booCallback: () => {takeMoney(20, 0)}
     },
     { // 5:30
@@ -200,7 +200,8 @@ while (hour < 8) {
         console.log("A customer walks up.\n");
         const customer = customers[Math.floor(hour)];
         console.log(`${customer.name}: ${customer.dialog}`);
-        const itemGiven = prompt("Offer them an item by letter (or X to skip): ") ?? ""
+        let itemGiven = prompt("Offer them an item by letter (or X to skip): ") ?? ""
+        itemGiven = itemGiven.toLowerCase();
         if (isValidItem(itemGiven) && customer.accepts.includes(itemGiven)) {
             console.log(`${customer.name}: ${customer.yayDialog}`);
             customer.yayCallback != undefined ? customer.yayCallback() : undefined;
@@ -330,9 +331,9 @@ function makeMoney(dollars: number, cents: number) {
     }
     moneyMade.dollars += dollars;
 
-    let centsp: string = "" + moneyMade.cents;
-    if (moneyMade.cents < 10) centsp = "0" + centsp;
-    console.log(`You made ${"$"}${moneyMade.dollars}.${centsp}`)
+    let centsp: string = "" + cents;
+    if (cents < 10) centsp = "0" + centsp;
+    console.log(`You made ${"$"}${dollars}.${centsp}`)
 }
 
 function takeMoney(dollars: number, cents: number) {
