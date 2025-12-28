@@ -412,8 +412,10 @@ if (payDock != 0) {
 for (const item of Object.values(inventory)) {
     end = Date.now() + 250;
     while (Date.now() < end);
-    console.log(`+$1.99 for keeping ${item.name} alive`)
-    makeMoney(1, 99);
+    if (item.alive) {
+        console.log(`+$1.99 for keeping ${item.name} alive`)
+        makeMoney(1, 99);
+    }
 }
 end = Date.now() + 250;
 while (Date.now() < end);
